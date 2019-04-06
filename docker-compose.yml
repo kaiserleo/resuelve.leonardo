@@ -2,9 +2,18 @@ version: '2.1'
 services:
   app:
     restart: always
+    container_name: resuelve-fc
     build: .
     ports:
       - 5000:5000
     volumes:
       - .:/app
     entrypoint: ["python", "app.py","runserver"]
+  test:
+    build: .
+    volumes:
+      - .:/app
+    command: nosetests -v
+    depends_on:
+            - app
+

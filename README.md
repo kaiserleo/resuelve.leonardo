@@ -7,3 +7,9 @@ ResuelveTuDeuda Interview
 docker-compose build
 docker-compose run app
 ```
+
+## Running the tests
+
+```
+docker-compose run test
+```
