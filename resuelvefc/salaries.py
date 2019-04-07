@@ -1,11 +1,5 @@
 from decimal import Decimal
-
-class ResuelveFCError(Exception):
-    """Base class for other exceptions"""
-    pass
-
-class LevelNotFoundException(ResuelveFCError):
-    pass
+from resuelvefc.exceptions import *
 
 class Salaries(object):
     goals_per_level_dict = {'A': 5, 'B': 10, 'C': 15, 'Cuauh': 20}

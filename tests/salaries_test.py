@@ -1,7 +1,8 @@
 import unittest
-from salaries import *
 from nose.tools import *
 from decimal import Decimal
+from resuelvefc.salaries import *
+from resuelvefc.exceptions import *
 
 class SalariesTest(unittest.TestCase):
 
@@ -48,6 +49,7 @@ class SalariesTest(unittest.TestCase):
                                 player4 ]
         self.salaries = Salaries(self.original_input)
 
+
     def test_exceeded_team_rate(self):
         """Assert that the team rate cannot go above 1"""
         self.salaries.team_scored['chivas'] = 20
@@ -55,12 +57,14 @@ class SalariesTest(unittest.TestCase):
         rate = self.salaries.team_rating('chivas')
         self.assertEqual(Decimal(1), rate)
 
+
     def test_team_rate(self):
         """Assert a correct team rate calculation"""
         self.salaries.team_scored['chivas'] = 10
         self.salaries.team_goal['chivas'] = 20
         rate = self.salaries.team_rating('chivas')
         self.assertEqual(Decimal(0.5), rate)
+
 
     def test_exceeded_player_rate(self):
         """Assert that the player rate cannot go above 1"""
@@ -71,6 +75,7 @@ class SalariesTest(unittest.TestCase):
         rate = self.salaries.player_rating(player)
         self.assertEqual(Decimal(1), rate)
 
+
     def test_player_rate(self):
         """Assert a correct player rate calculus"""
         player = {
@@ -79,6 +84,7 @@ class SalariesTest(unittest.TestCase):
                 }
         rate = self.salaries.player_rating(player)
         self.assertEqual(Decimal('0.1'), rate)
+
 
     @raises(LevelNotFoundException)
     def test_a_non_existing_level(self):
@@ -111,6 +117,7 @@ class SalariesTest(unittest.TestCase):
         self.assertEqual(len(self.salaries.team_goal), 2)
         self.assertEqual(len(self.salaries.team_scored), 2)
 
+
     def test_teams_processing(self):
         """Assert that we process correctly the team grouping"""
         result = self.salaries.process()
@@ -118,6 +125,7 @@ class SalariesTest(unittest.TestCase):
         self.assertEqual(self.salaries.team_goal['rojo'], 25)
         self.assertEqual(self.salaries.team_scored['azul'], 37)
         self.assertEqual(self.salaries.team_scored['rojo'], 19)
+
 
     def test_stuff_that_should_remain(self):
         """Assert that we are not modifying anything that we shouldn't"""
@@ -127,6 +135,7 @@ class SalariesTest(unittest.TestCase):
         for origin, result in zip(self.original_input, result_list):
             for key in key_list:
                 self.assertEqual(origin[key], result[key])
+
 
     def test_correct_final_result(self):
         """Assert that we are processing correctly a final salary"""
