@@ -8,7 +8,7 @@ services:
       - 5000:5000
     volumes:
       - .:/app
-    entrypoint: ["python", "app.py","runserver"]
+    entrypoint: ["gunicorn", "app:app", "-b", "0.0.0.0:5000"]
   test:
     build: .
     volumes:
