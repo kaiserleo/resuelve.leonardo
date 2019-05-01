@@ -17,11 +17,14 @@ class NonValidFieldsException(ResuelveFCError):
 class ArrayExpectedException(ResuelveFCError):
     pass
 
-class InvalidPlayerFormatExceptin(ResuelveFCError):
+class InvalidPlayerFormatException(ResuelveFCError):
     pass
 
 class InvalidDataTypeFormatException(ResuelveFCError):
     pass
 
 class InvalidPlayerFormatException(ResuelveFCError):
+    pass
+
+class InvalidRangeNumberException(ResuelveFCError):
     pass

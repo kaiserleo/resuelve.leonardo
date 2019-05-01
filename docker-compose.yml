@@ -9,6 +9,8 @@ services:
     volumes:
       - .:/app
     entrypoint: ["gunicorn", "app:app", "-b", "0.0.0.0:5000"]
+    expose:
+      - 5000
   test:
     build: .
     volumes:

@@ -34,6 +34,10 @@ class Salaries(object):
             player_goal = player['goles_minimos']
             player_scored = player['goles']
 
+            if( player_scored <= 0 ):
+                raise InvalidRangeNumberException(\
+                        player['nombre'] + ":" + 'goles')
+
             # Scored goals per team
             current_team_scored = self.team_scored.get(player_team, 0)
             new_team_scored = current_team_scored + player_scored
@@ -49,6 +53,14 @@ class Salaries(object):
         player_fixed = Decimal(player['sueldo'])
         player_bonus = Decimal(player['bono'])
         player_team = player['equipo']
+
+        if( player_fixed <= 0 ):
+            raise InvalidRangeNumberException(\
+                    player['nombre'] + ":" + 'sueldo')
+
+        if( player_bonus <= 0 ):
+            raise InvalidRangeNumberException(\
+                    player['nombre'] + ":" + 'bono')
 
         player_rate = self.player_rating(player)
         team_rate = self.team_rating(player_team)
@@ -81,6 +93,6 @@ class Salaries(object):
 
     def goals_per_level(self, level):
         if not level in self.goals_per_level_dict:
-            raise LevelNotFoundException(level + ' level does not exist')
+            raise LevelNotFoundException(level)
 
         return self.goals_per_level_dict[level]

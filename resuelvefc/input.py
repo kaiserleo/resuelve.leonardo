@@ -40,13 +40,11 @@ class InputValidator(object):
 
         missing_fields = expected_fields_set - received_fields_set
         if( len(missing_fields) > 0 ):
-            raise MissingFieldsException("Missing fields" + \
-                    str(list(missing_fields)))
+            raise MissingFieldsException(str(list(missing_fields)))
 
         remaining_fields = received_fields_set - expected_fields_set
         if( len(remaining_fields) > 0 ):
-            raise NonValidFieldsException("Non valid fields were received" + \
-                    str(list(remaining_fields)))
+            raise NonValidFieldsException(str(list(remaining_fields)))
 
     def validate_player_field_format(self, player, key):
         if( not key in player ):
@@ -55,7 +53,7 @@ class InputValidator(object):
         value = player[key]
         expected_type_set = self.expected_types[key]
         if( not isinstance(value, expected_type_set) ):
-            raise InvalidDataTypeFormatException(key, expected_type_set)
+            raise InvalidDataTypeFormatException(key + " - " + str(expected_type_set))
 
 
     def get_expected_types(self):
