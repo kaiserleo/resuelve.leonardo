@@ -12,7 +12,6 @@ def hello_world():
 
 @app.route('/calcula_sueldo', methods=['POST'])
 def compute_income():
-    print("narf")
     try:
         validator = InputValidator(request.data)
         players_in = validator.encode()
@@ -36,11 +35,11 @@ def compute_income():
     except InvalidDataTypeFormatException as e:
         return make_response(\
                 jsonify({'error': 'Invalid data type ' + str(e)}), 422)
-    except InvalidPlayerFormatException:
-        return make_response(jsonify({'error': 'Invalid player format'}), 422)
     except InvalidRangeNumberException as e:
         return make_response(\
                 jsonify({'error': 'Number outside range ' + str(e)}), 422)
+    except JSONDecodeException as e:
+        return make_response(jsonify({'error': str(e)}), 422)
 
 @app.errorhandler(404)
 def not_found(error):

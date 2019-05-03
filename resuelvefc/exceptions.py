@@ -28,3 +28,6 @@ class InvalidPlayerFormatException(ResuelveFCError):
 
 class InvalidRangeNumberException(ResuelveFCError):
     pass
+
+class JSONDecodeException(ResuelveFCError):
+    pass

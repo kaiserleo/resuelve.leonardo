@@ -9,7 +9,10 @@ class InputValidator(object):
         self.expected_types = self.get_expected_types()
 
     def encode(self):
-        self.data = json.loads(self.in_json, use_decimal=True)
+        try:
+            self.data = json.loads(self.in_json, use_decimal=True)
+        except json.errors.JSONDecodeError as e:
+            raise JSONDecodeException(str(e))
 
         self.validate_is_a_list()
         for player in self.data:
